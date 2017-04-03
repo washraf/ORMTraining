@@ -11,7 +11,8 @@ namespace RowDataGateway
 {
     public class StudentRowGateway
     {
-        private static readonly SqlConnection Con = new SqlConnection("Data Source=.;Initial Catalog=EMSDb;Integrated Security=True");
+        private static readonly SqlConnection Con
+            = new SqlConnection("Data Source=.;Initial Catalog=EMSDb;Integrated Security=True");
         public int Id { get; set; }
         public string Name { get; set; }
 

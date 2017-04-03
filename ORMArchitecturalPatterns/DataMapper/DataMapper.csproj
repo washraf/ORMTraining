@@ -4,17 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{69CBEC1F-E2BF-49C7-8CD3-418DE635467C}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>{61024C92-BA24-4089-87E7-31D12D5615CD}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Console</RootNamespace>
-    <AssemblyName>Console</AssemblyName>
+    <RootNamespace>DataMapper</RootNamespace>
+    <AssemblyName>DataMapper</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -24,7 +22,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -43,33 +40,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ActiveRecordDemo.cs" />
-    <Compile Include="MapperDemo.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="Student.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RowDataDemo.cs" />
-    <Compile Include="TableDataDemo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\ActiveRecord\ActiveRecord.csproj">
-      <Project>{e3ebb11c-a38d-488f-a6e2-dc4a5d33d462}</Project>
-      <Name>ActiveRecord</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DataMapper\DataMapper.csproj">
-      <Project>{61024c92-ba24-4089-87e7-31d12d5615cd}</Project>
-      <Name>DataMapper</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\RowDataGateway\RowDataGateway.csproj">
-      <Project>{C2FAAEA8-35D5-43E7-B6D4-8E8E2F111E79}</Project>
-      <Name>RowDataGateway</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\TableDataGateway\TableDataGateway.csproj">
-      <Project>{a017baf0-e1b7-4de6-a338-97418ec4be8c}</Project>
-      <Name>TableDataGateway</Name>
-    </ProjectReference>
+    <Compile Include="StudentMapper.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

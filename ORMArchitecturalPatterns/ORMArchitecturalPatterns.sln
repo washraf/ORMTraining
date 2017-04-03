@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ActiveRecord", "ActiveRecor
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Console", "Console\Console.csproj", "{69CBEC1F-E2BF-49C7-8CD3-418DE635467C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataMapper", "DataMapper\DataMapper.csproj", "{61024C92-BA24-4089-87E7-31D12D5615CD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{69CBEC1F-E2BF-49C7-8CD3-418DE635467C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{69CBEC1F-E2BF-49C7-8CD3-418DE635467C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{69CBEC1F-E2BF-49C7-8CD3-418DE635467C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{61024C92-BA24-4089-87E7-31D12D5615CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61024C92-BA24-4089-87E7-31D12D5615CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61024C92-BA24-4089-87E7-31D12D5615CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61024C92-BA24-4089-87E7-31D12D5615CD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

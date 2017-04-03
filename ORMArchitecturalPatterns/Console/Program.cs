@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.IO.MemoryMappedFiles;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,10 +15,10 @@ namespace Console
         #endregion
         static void Main(string[] args)
         {
-            RowDataDemo.Run();
+            //RowDataDemo.Run();
             //TableDataDemo.Run();
             //ActiveRecordDemo.Run();
-
+            MapperDemo.Run();
         }
     }
 }
