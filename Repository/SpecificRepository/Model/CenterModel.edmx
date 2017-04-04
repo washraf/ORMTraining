@@ -1,0 +1,512 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="CenterModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CenterNew">
+          <Key>
+            <PropertyRef Name="New_ID" />
+          </Key>
+          <Property Name="New_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Details" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="ReleaseDate" Type="date" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Center.dbo.CenterNewPictures' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="CenterNewPictures">
+          <Key>
+            <PropertyRef Name="New_ID" />
+            <PropertyRef Name="PictureDescription" />
+            <PropertyRef Name="PictureLocation" />
+          </Key>
+          <Property Name="New_ID" Type="int" Nullable="false" />
+          <Property Name="PictureDescription" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PictureLocation" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Course">
+          <Key>
+            <PropertyRef Name="Course_ID" />
+          </Key>
+          <Property Name="Course_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CourseName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CourseDescription" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CourseContents" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="CourseDuration" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Instructor">
+          <Key>
+            <PropertyRef Name="Instructor_ID" />
+          </Key>
+          <Property Name="Instructor_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Mobile" Type="nvarchar" MaxLength="12" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="Gender" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="HourRate" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="InstructorTeachIntake">
+          <Key>
+            <PropertyRef Name="Intructor_ID" />
+            <PropertyRef Name="Intake_ID" />
+          </Key>
+          <Property Name="Intructor_ID" Type="int" Nullable="false" />
+          <Property Name="Intake_ID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Intake">
+          <Key>
+            <PropertyRef Name="Intake_ID" />
+          </Key>
+          <Property Name="Intake_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StartDate" Type="datetime" Nullable="false" />
+          <Property Name="EndDate" Type="datetime" Nullable="false" />
+          <Property Name="Times" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="Course_ID" Type="int" Nullable="false" />
+          <Property Name="Price" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Lesson">
+          <Key>
+            <PropertyRef Name="Lesson_ID" />
+          </Key>
+          <Property Name="Lesson_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LessonName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="LessonContent" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Video" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Course_ID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="Student_ID" />
+          </Key>
+          <Property Name="Student_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Mobile" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Gender" Type="char" MaxLength="1" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StudentTakeIntake">
+          <Key>
+            <PropertyRef Name="Intake_ID" />
+            <PropertyRef Name="Student_ID" />
+          </Key>
+          <Property Name="Intake_ID" Type="int" Nullable="false" />
+          <Property Name="Student_ID" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_CenterNewsPictures_CenterNews1">
+          <End Role="CenterNew" Type="Self.CenterNew" Multiplicity="1" />
+          <End Role="CenterNewPictures" Type="Self.CenterNewPictures" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CenterNew">
+              <PropertyRef Name="New_ID" />
+            </Principal>
+            <Dependent Role="CenterNewPictures">
+              <PropertyRef Name="New_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InstructorTeachIntake_Instructors">
+          <End Role="Instructor" Type="Self.Instructor" Multiplicity="1" />
+          <End Role="InstructorTeachIntake" Type="Self.InstructorTeachIntake" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Instructor">
+              <PropertyRef Name="Instructor_ID" />
+            </Principal>
+            <Dependent Role="InstructorTeachIntake">
+              <PropertyRef Name="Intructor_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InstructorTeachIntake_Intakes1">
+          <End Role="Intake" Type="Self.Intake" Multiplicity="1" />
+          <End Role="InstructorTeachIntake" Type="Self.InstructorTeachIntake" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Intake">
+              <PropertyRef Name="Intake_ID" />
+            </Principal>
+            <Dependent Role="InstructorTeachIntake">
+              <PropertyRef Name="Intake_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Intakes_Courses">
+          <End Role="Course" Type="Self.Course" Multiplicity="1" />
+          <End Role="Intake" Type="Self.Intake" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Course">
+              <PropertyRef Name="Course_ID" />
+            </Principal>
+            <Dependent Role="Intake">
+              <PropertyRef Name="Course_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Lessons_Courses">
+          <End Role="Course" Type="Self.Course" Multiplicity="1" />
+          <End Role="Lesson" Type="Self.Lesson" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Course">
+              <PropertyRef Name="Course_ID" />
+            </Principal>
+            <Dependent Role="Lesson">
+              <PropertyRef Name="Course_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentTakeIntake_Intakes">
+          <End Role="Intake" Type="Self.Intake" Multiplicity="1" />
+          <End Role="StudentTakeIntake" Type="Self.StudentTakeIntake" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Intake">
+              <PropertyRef Name="Intake_ID" />
+            </Principal>
+            <Dependent Role="StudentTakeIntake">
+              <PropertyRef Name="Intake_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentTakeIntake_Students">
+          <End Role="Student" Type="Self.Student" Multiplicity="1" />
+          <End Role="StudentTakeIntake" Type="Self.StudentTakeIntake" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="Student_ID" />
+            </Principal>
+            <Dependent Role="StudentTakeIntake">
+              <PropertyRef Name="Student_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CenterModelStoreContainer">
+          <EntitySet Name="CenterNew" EntityType="Self.CenterNew" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Course" EntityType="Self.Course" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Instructor" EntityType="Self.Instructor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InstructorTeachIntake" EntityType="Self.InstructorTeachIntake" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Intake" EntityType="Self.Intake" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Lesson" EntityType="Self.Lesson" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StudentTakeIntake" EntityType="Self.StudentTakeIntake" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CenterNewPictures" EntityType="Self.CenterNewPictures" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [CenterNewPictures].[New_ID] AS [New_ID], 
+    [CenterNewPictures].[PictureDescription] AS [PictureDescription], 
+    [CenterNewPictures].[PictureLocation] AS [PictureLocation]
+    FROM [dbo].[CenterNewPictures] AS [CenterNewPictures]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_CenterNewsPictures_CenterNews1" Association="Self.FK_CenterNewsPictures_CenterNews1">
+            <End Role="CenterNew" EntitySet="CenterNew" />
+            <End Role="CenterNewPictures" EntitySet="CenterNewPictures" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InstructorTeachIntake_Instructors" Association="Self.FK_InstructorTeachIntake_Instructors">
+            <End Role="Instructor" EntitySet="Instructor" />
+            <End Role="InstructorTeachIntake" EntitySet="InstructorTeachIntake" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InstructorTeachIntake_Intakes1" Association="Self.FK_InstructorTeachIntake_Intakes1">
+            <End Role="Intake" EntitySet="Intake" />
+            <End Role="InstructorTeachIntake" EntitySet="InstructorTeachIntake" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Intakes_Courses" Association="Self.FK_Intakes_Courses">
+            <End Role="Course" EntitySet="Course" />
+            <End Role="Intake" EntitySet="Intake" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Lessons_Courses" Association="Self.FK_Lessons_Courses">
+            <End Role="Course" EntitySet="Course" />
+            <End Role="Lesson" EntitySet="Lesson" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentTakeIntake_Intakes" Association="Self.FK_StudentTakeIntake_Intakes">
+            <End Role="Intake" EntitySet="Intake" />
+            <End Role="StudentTakeIntake" EntitySet="StudentTakeIntake" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentTakeIntake_Students" Association="Self.FK_StudentTakeIntake_Students">
+            <End Role="Student" EntitySet="Student" />
+            <End Role="StudentTakeIntake" EntitySet="StudentTakeIntake" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CenterModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CenterNew">
+          <Key>
+            <PropertyRef Name="New_ID" />
+          </Key>
+          <Property Name="New_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Details" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ReleaseDate" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="CenterNewPictures" Relationship="Self.FK_CenterNewsPictures_CenterNews1" FromRole="CenterNew" ToRole="CenterNewPictures" />
+        </EntityType>
+        <EntityType Name="Course">
+          <Key>
+            <PropertyRef Name="Course_ID" />
+          </Key>
+          <Property Name="Course_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CourseName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CourseDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CourseContents" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CourseDuration" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Intakes" Relationship="Self.FK_Intakes_Courses" FromRole="Course" ToRole="Intake" />
+          <NavigationProperty Name="Lessons" Relationship="Self.FK_Lessons_Courses" FromRole="Course" ToRole="Lesson" />
+        </EntityType>
+        <EntityType Name="Instructor">
+          <Key>
+            <PropertyRef Name="Instructor_ID" />
+          </Key>
+          <Property Name="Instructor_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Mobile" Type="String" MaxLength="12" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Gender" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="HourRate" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Intakes" Relationship="Self.InstructorTeachIntake" FromRole="Instructor" ToRole="Intake" />
+        </EntityType>
+        <EntityType Name="Intake">
+          <Key>
+            <PropertyRef Name="Intake_ID" />
+          </Key>
+          <Property Name="Intake_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Times" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Course_ID" Type="Int32" Nullable="false" />
+          <Property Name="Price" Type="Double" Nullable="false" />
+          <NavigationProperty Name="Course" Relationship="Self.FK_Intakes_Courses" FromRole="Intake" ToRole="Course" />
+          <NavigationProperty Name="Instructors" Relationship="Self.InstructorTeachIntake" FromRole="Intake" ToRole="Instructor" />
+          <NavigationProperty Name="Students" Relationship="Self.StudentTakeIntake" FromRole="Intake" ToRole="Student" />
+        </EntityType>
+        <EntityType Name="Lesson">
+          <Key>
+            <PropertyRef Name="Lesson_ID" />
+          </Key>
+          <Property Name="Lesson_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LessonName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LessonContent" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Video" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Course_ID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Course" Relationship="Self.FK_Lessons_Courses" FromRole="Lesson" ToRole="Course" />
+        </EntityType>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="Student_ID" />
+          </Key>
+          <Property Name="Student_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Mobile" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Gender" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Intakes" Relationship="Self.StudentTakeIntake" FromRole="Student" ToRole="Intake" />
+        </EntityType>
+        <EntityType Name="CenterNewPicture">
+          <Key>
+            <PropertyRef Name="New_ID" />
+            <PropertyRef Name="PictureDescription" />
+            <PropertyRef Name="PictureLocation" />
+          </Key>
+          <Property Name="New_ID" Type="Int32" Nullable="false" />
+          <Property Name="PictureDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PictureLocation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="CenterNew" Relationship="Self.FK_CenterNewsPictures_CenterNews1" FromRole="CenterNewPictures" ToRole="CenterNew" />
+        </EntityType>
+        <Association Name="FK_CenterNewsPictures_CenterNews1">
+          <End Role="CenterNew" Type="Self.CenterNew" Multiplicity="1" />
+          <End Role="CenterNewPictures" Type="Self.CenterNewPicture" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CenterNew">
+              <PropertyRef Name="New_ID" />
+            </Principal>
+            <Dependent Role="CenterNewPictures">
+              <PropertyRef Name="New_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Intakes_Courses">
+          <End Role="Course" Type="Self.Course" Multiplicity="1" />
+          <End Role="Intake" Type="Self.Intake" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Course">
+              <PropertyRef Name="Course_ID" />
+            </Principal>
+            <Dependent Role="Intake">
+              <PropertyRef Name="Course_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Lessons_Courses">
+          <End Role="Course" Type="Self.Course" Multiplicity="1" />
+          <End Role="Lesson" Type="Self.Lesson" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Course">
+              <PropertyRef Name="Course_ID" />
+            </Principal>
+            <Dependent Role="Lesson">
+              <PropertyRef Name="Course_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="InstructorTeachIntake">
+          <End Role="Instructor" Type="Self.Instructor" Multiplicity="*" />
+          <End Role="Intake" Type="Self.Intake" Multiplicity="*" />
+        </Association>
+        <Association Name="StudentTakeIntake">
+          <End Role="Intake" Type="Self.Intake" Multiplicity="*" />
+          <End Role="Student" Type="Self.Student" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="CenterEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CenterNews" EntityType="Self.CenterNew" />
+          <EntitySet Name="Courses" EntityType="Self.Course" />
+          <EntitySet Name="Instructors" EntityType="Self.Instructor" />
+          <EntitySet Name="Intakes" EntityType="Self.Intake" />
+          <EntitySet Name="Lessons" EntityType="Self.Lesson" />
+          <EntitySet Name="Students" EntityType="Self.Student" />
+          <EntitySet Name="CenterNewPictures" EntityType="Self.CenterNewPicture" />
+          <AssociationSet Name="FK_CenterNewsPictures_CenterNews1" Association="Self.FK_CenterNewsPictures_CenterNews1">
+            <End Role="CenterNew" EntitySet="CenterNews" />
+            <End Role="CenterNewPictures" EntitySet="CenterNewPictures" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Intakes_Courses" Association="Self.FK_Intakes_Courses">
+            <End Role="Course" EntitySet="Courses" />
+            <End Role="Intake" EntitySet="Intakes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Lessons_Courses" Association="Self.FK_Lessons_Courses">
+            <End Role="Course" EntitySet="Courses" />
+            <End Role="Lesson" EntitySet="Lessons" />
+          </AssociationSet>
+          <AssociationSet Name="InstructorTeachIntake" Association="Self.InstructorTeachIntake">
+            <End Role="Instructor" EntitySet="Instructors" />
+            <End Role="Intake" EntitySet="Intakes" />
+          </AssociationSet>
+          <AssociationSet Name="StudentTakeIntake" Association="Self.StudentTakeIntake">
+            <End Role="Intake" EntitySet="Intakes" />
+            <End Role="Student" EntitySet="Students" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CenterModelStoreContainer" CdmEntityContainer="CenterEntities">
+          <EntitySetMapping Name="CenterNews">
+            <EntityTypeMapping TypeName="CenterModel.CenterNew">
+              <MappingFragment StoreEntitySet="CenterNew">
+                <ScalarProperty Name="New_ID" ColumnName="New_ID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Details" ColumnName="Details" />
+                <ScalarProperty Name="ReleaseDate" ColumnName="ReleaseDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Courses">
+            <EntityTypeMapping TypeName="CenterModel.Course">
+              <MappingFragment StoreEntitySet="Course">
+                <ScalarProperty Name="Course_ID" ColumnName="Course_ID" />
+                <ScalarProperty Name="CourseName" ColumnName="CourseName" />
+                <ScalarProperty Name="CourseDescription" ColumnName="CourseDescription" />
+                <ScalarProperty Name="CourseContents" ColumnName="CourseContents" />
+                <ScalarProperty Name="CourseDuration" ColumnName="CourseDuration" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Instructors">
+            <EntityTypeMapping TypeName="CenterModel.Instructor">
+              <MappingFragment StoreEntitySet="Instructor">
+                <ScalarProperty Name="Instructor_ID" ColumnName="Instructor_ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="HourRate" ColumnName="HourRate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Intakes">
+            <EntityTypeMapping TypeName="CenterModel.Intake">
+              <MappingFragment StoreEntitySet="Intake">
+                <ScalarProperty Name="Intake_ID" ColumnName="Intake_ID" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="Times" ColumnName="Times" />
+                <ScalarProperty Name="Course_ID" ColumnName="Course_ID" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Lessons">
+            <EntityTypeMapping TypeName="CenterModel.Lesson">
+              <MappingFragment StoreEntitySet="Lesson">
+                <ScalarProperty Name="Lesson_ID" ColumnName="Lesson_ID" />
+                <ScalarProperty Name="LessonName" ColumnName="LessonName" />
+                <ScalarProperty Name="LessonContent" ColumnName="LessonContent" />
+                <ScalarProperty Name="Video" ColumnName="Video" />
+                <ScalarProperty Name="Course_ID" ColumnName="Course_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Students">
+            <EntityTypeMapping TypeName="CenterModel.Student">
+              <MappingFragment StoreEntitySet="Student">
+                <ScalarProperty Name="Student_ID" ColumnName="Student_ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CenterNewPictures">
+            <EntityTypeMapping TypeName="CenterModel.CenterNewPicture">
+              <MappingFragment StoreEntitySet="CenterNewPictures">
+                <ScalarProperty Name="New_ID" ColumnName="New_ID" />
+                <ScalarProperty Name="PictureDescription" ColumnName="PictureDescription" />
+                <ScalarProperty Name="PictureLocation" ColumnName="PictureLocation" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="InstructorTeachIntake" TypeName="CenterModel.InstructorTeachIntake" StoreEntitySet="InstructorTeachIntake">
+            <EndProperty Name="Instructor">
+              <ScalarProperty Name="Instructor_ID" ColumnName="Intructor_ID" />
+            </EndProperty>
+            <EndProperty Name="Intake">
+              <ScalarProperty Name="Intake_ID" ColumnName="Intake_ID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="StudentTakeIntake" TypeName="CenterModel.StudentTakeIntake" StoreEntitySet="StudentTakeIntake">
+            <EndProperty Name="Intake">
+              <ScalarProperty Name="Intake_ID" ColumnName="Intake_ID" />
+            </EndProperty>
+            <EndProperty Name="Student">
+              <ScalarProperty Name="Student_ID" ColumnName="Student_ID" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

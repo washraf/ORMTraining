@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="16b459afff2b48bcb5c074a6ff6e9425" Name="Diagram1">
+        <EntityTypeShape EntityType="CenterModel.CenterNew" Width="1.5" PointX="5.75" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CenterModel.Course" Width="1.5" PointX="0.75" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CenterModel.Instructor" Width="1.5" PointX="0.75" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CenterModel.Intake" Width="1.5" PointX="3" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CenterModel.Lesson" Width="1.5" PointX="3" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="CenterModel.Student" Width="1.5" PointX="5.25" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CenterModel.CenterNewPicture" Width="1.5" PointX="8" PointY="7" IsExpanded="true" />
+        <AssociationConnector Association="CenterModel.FK_CenterNewsPictures_CenterNews1" ManuallyRouted="false" />
+        <AssociationConnector Association="CenterModel.FK_Intakes_Courses" ManuallyRouted="false" />
+        <AssociationConnector Association="CenterModel.FK_Lessons_Courses" ManuallyRouted="false" />
+        <AssociationConnector Association="CenterModel.InstructorTeachIntake" ManuallyRouted="false" />
+        <AssociationConnector Association="CenterModel.StudentTakeIntake" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
