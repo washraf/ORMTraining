@@ -1,0 +1,107 @@
+﻿USE [master]
+GO
+/****** Object:  Database [SingleTableCenter]    Script Date: 04-Apr-17 9:51:42 PM ******/
+CREATE DATABASE [SingleTableCenter]
+ CONTAINMENT = NONE
+ ON  PRIMARY 
+( NAME = N'SingleTableCenter', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL12.MSSQLSERVER\MSSQL\DATA\SingleTableCenter.mdf' , SIZE = 4096KB , MAXSIZE = UNLIMITED, FILEGROWTH = 1024KB )
+ LOG ON 
+( NAME = N'SingleTableCenter_log', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL12.MSSQLSERVER\MSSQL\DATA\SingleTableCenter_log.ldf' , SIZE = 1024KB , MAXSIZE = 2048GB , FILEGROWTH = 10%)
+GO
+ALTER DATABASE [SingleTableCenter] SET COMPATIBILITY_LEVEL = 120
+GO
+IF (1 = FULLTEXTSERVICEPROPERTY('IsFullTextInstalled'))
+begin
+EXEC [SingleTableCenter].[dbo].[sp_fulltext_database] @action = 'enable'
+end
+GO
+ALTER DATABASE [SingleTableCenter] SET ANSI_NULL_DEFAULT OFF 
+GO
+ALTER DATABASE [SingleTableCenter] SET ANSI_NULLS OFF 
+GO
+ALTER DATABASE [SingleTableCenter] SET ANSI_PADDING OFF 
+GO
+ALTER DATABASE [SingleTableCenter] SET ANSI_WARNINGS OFF 
+GO
+ALTER DATABASE [SingleTableCenter] SET ARITHABORT OFF 
+GO
+ALTER DATABASE [SingleTableCenter] SET AUTO_CLOSE OFF 
+GO
+ALTER DATABASE [SingleTableCenter] SET AUTO_SHRINK OFF 
+GO
+ALTER DATABASE [SingleTableCenter] SET AUTO_UPDATE_STATISTICS ON 
+GO
+ALTER DATABASE [SingleTableCenter] SET CURSOR_CLOSE_ON_COMMIT OFF 
+GO
+ALTER DATABASE [SingleTableCenter] SET CURSOR_DEFAULT  GLOBAL 
+GO
+ALTER DATABASE [SingleTableCenter] SET CONCAT_NULL_YIELDS_NULL OFF 
+GO
+ALTER DATABASE [SingleTableCenter] SET NUMERIC_ROUNDABORT OFF 
+GO
+ALTER DATABASE [SingleTableCenter] SET QUOTED_IDENTIFIER OFF 
+GO
+ALTER DATABASE [SingleTableCenter] SET RECURSIVE_TRIGGERS OFF 
+GO
+ALTER DATABASE [SingleTableCenter] SET  DISABLE_BROKER 
+GO
+ALTER DATABASE [SingleTableCenter] SET AUTO_UPDATE_STATISTICS_ASYNC OFF 
+GO
+ALTER DATABASE [SingleTableCenter] SET DATE_CORRELATION_OPTIMIZATION OFF 
+GO
+ALTER DATABASE [SingleTableCenter] SET TRUSTWORTHY OFF 
+GO
+ALTER DATABASE [SingleTableCenter] SET ALLOW_SNAPSHOT_ISOLATION OFF 
+GO
+ALTER DATABASE [SingleTableCenter] SET PARAMETERIZATION SIMPLE 
+GO
+ALTER DATABASE [SingleTableCenter] SET READ_COMMITTED_SNAPSHOT OFF 
+GO
+ALTER DATABASE [SingleTableCenter] SET HONOR_BROKER_PRIORITY OFF 
+GO
+ALTER DATABASE [SingleTableCenter] SET RECOVERY FULL 
+GO
+ALTER DATABASE [SingleTableCenter] SET  MULTI_USER 
+GO
+ALTER DATABASE [SingleTableCenter] SET PAGE_VERIFY CHECKSUM  
+GO
+ALTER DATABASE [SingleTableCenter] SET DB_CHAINING OFF 
+GO
+ALTER DATABASE [SingleTableCenter] SET FILESTREAM( NON_TRANSACTED_ACCESS = OFF ) 
+GO
+ALTER DATABASE [SingleTableCenter] SET TARGET_RECOVERY_TIME = 0 SECONDS 
+GO
+ALTER DATABASE [SingleTableCenter] SET DELAYED_DURABILITY = DISABLED 
+GO
+EXEC sys.sp_db_vardecimal_storage_format N'SingleTableCenter', N'ON'
+GO
+USE [SingleTableCenter]
+GO
+/****** Object:  Table [dbo].[Courses]    Script Date: 04-Apr-17 9:51:43 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Courses](
+	[CourseId] [int] IDENTITY(1,1) NOT NULL,
+	[CourseName] [nvarchar](50) NOT NULL,
+	[Price] [float] NOT NULL,
+	[Type] [nvarchar](50) NULL,
+	[Location] [nvarchar](50) NULL,
+	[SelfPaced] [bit] NULL,
+ CONSTRAINT [PK_Courses] PRIMARY KEY CLUSTERED 
+(
+	[CourseId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET IDENTITY_INSERT [dbo].[Courses] ON 
+
+INSERT [dbo].[Courses] ([CourseId], [CourseName], [Price], [Type], [Location], [SelfPaced]) VALUES (1, N'Added In time 03-Apr-17 10:43:34 PM', 123, N'OnlineCourse', NULL, 1)
+INSERT [dbo].[Courses] ([CourseId], [CourseName], [Price], [Type], [Location], [SelfPaced]) VALUES (2, N'Added In time 03-Apr-17 10:43:34 PM', 123, N'LabCourse', N'Home Center', NULL)
+SET IDENTITY_INSERT [dbo].[Courses] OFF
+USE [master]
+GO
+ALTER DATABASE [SingleTableCenter] SET  READ_WRITE 
+GO

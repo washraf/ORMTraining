@@ -29,8 +29,8 @@ namespace CodeFirst_TPC
                 {
                     Console.WriteLine("{0}\t{1}\t{2}", course.CourseId, course.CourseName, course.Location);
                 }
-                var xxx = context.Courses.ToList().Last().CourseId;
-                int last = xxx;
+                var last = context.Courses.ToList().LastOrDefault()?.CourseId??1;
+
                 OnlineCourse online = new OnlineCourse()
                 {
                    CourseId = last+1,
