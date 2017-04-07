@@ -13,7 +13,11 @@ namespace TableDataGateway
     {
         
         private static readonly SqlConnection Con = new SqlConnection("Data Source=.;Initial Catalog=EMSDb;Integrated Security=True");
-        
+
+        public StudentTableGateway()
+        {
+            Con.Open();
+        }
         public DataTable FindAll()
         {
             String sql = "select * from student";
@@ -45,14 +49,14 @@ namespace TableDataGateway
             return dt;
         }
 
-        public Object[] FindRow(long key)
+        public object[] FindRow(long key)
         {
             String sql = "SELECT * FROM student WHERE id = @key";
             IDbCommand comm = new SqlCommand(sql, Con);
             comm.Parameters.Add(new OleDbParameter("key", key));
             IDataReader reader = comm.ExecuteReader();
             reader.Read();
-            Object[] result = new Object[reader.FieldCount];
+            object[] result = new Object[reader.FieldCount];
             reader.GetValues(result);
             reader.Close();
             return result;
@@ -70,8 +74,8 @@ namespace TableDataGateway
             string sql = "INSERT INTO student VALUES (@key,@name)";
             long key = DateTime.Now.Ticks;
             IDbCommand comm = new SqlCommand(sql, Con);
-            comm.Parameters.Add(new OleDbParameter("key", key));
-            comm.Parameters.Add(new OleDbParameter("name", name));
+            comm.Parameters.Add(new SqlParameter("key", key));
+            comm.Parameters.Add(new SqlParameter("name", name));
             comm.ExecuteNonQuery();
             return key;
         }

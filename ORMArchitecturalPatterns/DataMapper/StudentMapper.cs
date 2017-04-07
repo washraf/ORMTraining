@@ -8,6 +8,7 @@ namespace DataMapper
 {
     public class StudentMapper : IDisposable
     {
+
         private SqlConnection _connection;
         public StudentMapper(SqlConnection con)
         {
@@ -66,5 +67,6 @@ namespace DataMapper
         {
             _connection.Dispose();
         }
+
     }
 }

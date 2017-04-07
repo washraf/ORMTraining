@@ -47,14 +47,7 @@ namespace Mapper.Sets
 
         public int Add(TEntityType item)
         {
-            var props = typeof(TEntityType).GetProperties()
-                .Where(
-                    x => x.CustomAttributes.
-                    All(y => y.GetType() == typeof(AutoId) ||
-                    y.GetType() == typeof(EntityKey) ||
-                    y.GetType() == typeof(NonPersisted)) &&
-                    !x.GetMethod.IsVirtual
-                    );
+          var props =  _mapper.GetProperties(item);
             var attributes = from m in props select m.Name;
             var parameterlist = from m in attributes select "@" + m;
 
@@ -75,15 +68,7 @@ namespace Mapper.Sets
 
         public int Update(TEntityType item)
         {
-            var props = typeof(TEntityType).GetProperties()
-                .Where(
-                    x => x.CustomAttributes.
-                        All(y => y.GetType() == typeof(AutoId) ||
-                                 y.GetType() == typeof(EntityKey) ||
-                                 y.GetType() == typeof(NonPersisted)
-
-                        ) &&
-                    !x.GetMethod.IsVirtual);
+            var props = _mapper.GetProperties(item);
 
             List<SqlParameter> sqlParameters = new List<SqlParameter>();
 

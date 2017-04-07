@@ -16,9 +16,9 @@ namespace Console
         static void Main(string[] args)
         {
             //RowDataDemo.Run();
-            //TableDataDemo.Run();
+            TableDataDemo.Run();
             //ActiveRecordDemo.Run();
-            MapperDemo.Run();
+            //MapperDemo.Run();
         }
     }
 }

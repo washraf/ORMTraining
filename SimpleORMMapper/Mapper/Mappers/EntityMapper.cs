@@ -130,5 +130,18 @@ namespace Mapper.Mappers
             object single = items.Cast<object>().Single();
             return single;
         }
+
+        public IEnumerable<PropertyInfo> GetProperties(TEntityType item)
+        {
+            var props = typeof(TEntityType).GetProperties()
+                .Where(
+                    x => x.CustomAttributes.
+                    All(y => y.GetType() == typeof(AutoId) ||
+                    y.GetType() == typeof(EntityKey) ||
+                    y.GetType() == typeof(NonPersisted)) &&
+                    !x.GetMethod.IsVirtual
+                    );
+            return props;
+        }
     }
 }
